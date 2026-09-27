@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="numeric" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
+  <info>
+    <title>Computers and Concrete (Techno-Press)</title>
+    <title-short>CAC</title-short>
+    <id>computers-and-concrete-techno-press</id>
+    <link href="http://www.techno-press.org/cac/5" rel="self"/>
+    <link href="http://www.techno-press.org" rel="documentation"/>
+    <author>
+      <name>Custom style, built from a published Computers and Concrete article</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <issn>1598-8198</issn>
+    <eissn>1598-818X</eissn>
+    <summary>Numeric in-text citations ([1], [1-4], [8, 9]); reference list numbered in citation order with Harvard-style entries: Author, A.B., Author, C.D. (Year). Title. Journal Name, Volume(Issue), pages. DOI. Matches Techno-Press journals such as Computers and Concrete, Structural Engineering and Mechanics, Steel and Composite Structures, etc.</summary>
+    <updated>2026-09-27T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all"
+            sort-separator=", "
+            delimiter=", "
+            and="none"
+            initialize-with=". "
+            initialize="true"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="issued-year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="title">
+    <text variable="title" text-case="sentence"/>
+  </macro>
+
+  <macro name="container-title">
+    <text variable="container-title" font-style="italic"/>
+  </macro>
+
+  <macro name="volume-issue-pages">
+    <group delimiter=", ">
+      <group>
+        <text variable="volume"/>
+        <text variable="issue" prefix="(" suffix=")"/>
+      </group>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <macro name="publisher">
+    <group delimiter=", ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+
+  <macro name="doi">
+    <text variable="DOI" prefix="https://doi.org/"/>
+  </macro>
+
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography>
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <text macro="author" suffix=" "/>
+      <text macro="issued-year" prefix="(" suffix="). "/>
+      <text macro="title" suffix=". "/>
+      <choose>
+        <if type="article-journal article-magazine article-newspaper">
+          <group delimiter=", " suffix=". ">
+            <text macro="container-title"/>
+            <text macro="volume-issue-pages"/>
+          </group>
+        </if>
+        <else-if type="book chapter paper-conference thesis report">
+          <group delimiter=", " suffix=". ">
+            <text macro="container-title"/>
+            <text macro="publisher"/>
+          </group>
+        </else-if>
+        <else>
+          <text macro="container-title" suffix=". "/>
+        </else>
+      </choose>
+      <text macro="doi"/>
+    </layout>
+  </bibliography>
+</style>
